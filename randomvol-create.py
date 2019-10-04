@@ -18,21 +18,23 @@ random_string = ''.join(random.choice(chars) for _ in range(13))
 
 
 
-hosts = ['e25-h09-740xd.alias.bos.scalelab.redhat.com', 'e24-h35-740xd.alias.bos.scalelab.redhat.com', 'e25-h13-740xd.alias.bos.scalelab.redhat.com', 'e25-h15-740xd.alias.bos.scalelab.redhat.com', 'e25-h17-740xd.alias.bos.scalelab.redhat.com', 'e25-h19-740xd.alias.bos.scalelab.redhat.com']
+hosts = ['dhcp35-75.lab.eng.blr.redhat.com', 'dhcp35-194.lab.eng.blr.redhat.com', 'dhcp35-173.lab.eng.blr.redhat.com', 'dhcp35-108.lab.eng.blr.redhat.com', 'dhcp35-42.lab.eng.blr.redhat.com', 'dhcp35-182.lab.eng.blr.redhat.com']
+
 
 randomhost = random.choice(hosts)
-subvols = (random.choice([2, 3, 4, 5, 6]))
+subvols = (random.choice([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 print(randomhost)
 #randvoltype = (random.choice(['disp', 'dist-disp', 'rep' , 'dist-rep', 'arb', 'dist-arb', 'single']))
-randvoltype = 'dist-rep'
-brick_selected = (random.choice(['1', '2', '3', '4', '5', '6']))
+randvoltype = (random.choice(['disp', 'rep' , 'arb', 'single']))
+#randvoltype = 'dist-rep'
+brick_selected = (random.choice([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]))
 
 if randvoltype == 'single':
 	print("voltype selected is single")
 	print("%s, %s" % (randvoltype, brick_selected))
 	vname = randvoltype + '_' + random_string
 	print(vname)
-	brickpath = '/gluster/brick' + brick_selected + '/' + vname
+	brickpath = '/gluster/brick' + str(brick_selected) + '/' + vname
 	print(brickpath)
 	cmd =  "gluster v create %s %s:%s" % (vname, randomhost, brickpath)
 	print(cmd)
@@ -46,7 +48,7 @@ elif randvoltype == 'disp':
 	vname = randvoltype + '_' + random_string
 	print (vname)
 	for i in hosts:
-		host_brickpath = i + ':/gluster/brick' + brick_selected + '/' + vname
+		host_brickpath = i + ':/gluster/brick' + str(brick_selected) + '/' + vname
 		print(host_brickpath)
 		final_brickpath = final_brickpath + host_brickpath + " "
 	cmd =  "gluster v create %s disperse 6 redundancy 2 %s" % (vname, final_brickpath)
@@ -76,7 +78,7 @@ elif randvoltype == 'rep' :
 	vname = randvoltype + '_' + random_string
 	print (vname)
 	for each in random.sample(hosts, 3) :
-		host_brickpath = each + ':/gluster/brick' + brick_selected + '/' + vname
+		host_brickpath = each + ':/gluster/brick' + str(brick_selected) + '/' + vname
 		print(host_brickpath)
 		final_brickpath = final_brickpath + host_brickpath + " "
 	cmd =  "gluster v create %s rep 3 %s" % (vname, final_brickpath)
@@ -107,7 +109,7 @@ elif randvoltype == 'arb' :
 	print (vname)
 	#for i in range(0,3) :
 	for each in random.sample(hosts, 3) :
-		host_brickpath = each + ':/gluster/brick' + brick_selected + '/' + vname
+		host_brickpath = each + ':/gluster/brick' + str(brick_selected) + '/' + vname
 		print(host_brickpath)
 		final_brickpath = final_brickpath + host_brickpath + " "
 	cmd =  "gluster v create %s rep 3 arbiter 1 %s" % (vname, final_brickpath)
@@ -131,5 +133,3 @@ elif randvoltype == 'dist-arb' :
 	print(cmd)
 	os.system(cmd)
 	os.system('gluster v start %s' % vname)
-
-
