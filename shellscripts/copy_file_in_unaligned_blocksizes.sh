@@ -26,7 +26,7 @@ for j in {11..20};do
 #               echo -e " renaming file to capture m5ssum post hole punch \n "
 #               mv -f dfile_dd-$j-${offset[$i]}-$mds falloc_-p-o_9949-l_9900000_dfile_dd-$j-${offset[$i]}-$mds-$fal_mds;
         done;
-# uncomment below line if you want to remove the files
+# comment below line if you want to DONT remove the files
         for rm in $(ls|egrep -v 1_basefile|grep "6428394cc2bccdadea86b922e1f0e20c");do rm -rf $rm ;done   
 done
 
