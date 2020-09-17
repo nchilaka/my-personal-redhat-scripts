@@ -1,6 +1,18 @@
 '''
-# for i in {1..10000};do echo "####### loop $i #####" |& tee -a imagecreation.log; date|& tee -a imagecreation.log; python image.py |& tee -a imagecreation.log;date |& tee -a imagecreation.log;done
-# for i in {1..20000};do echo "#### loop $i ####" |& tee -a ceph-health-command.log;date |& tee -a ceph-health-command.log; ceph -s |& tee -a ceph-health-command.log;echo "=== rbd ls dockerpool1 ==" |& tee -a ceph-health-command.log;  rbd ls dockerpool1|wc -l |& tee -a ceph-health-command.log;echo "=== rados ls --pool  dockerpool1 |wc -l =="  |& tee -a ceph-health-command.log |& tee -a ceph-health-command.log; rados ls --pool dockerpool1 |wc -l |& tee -a ceph-health-command.log; echo "___rados df____"  |& tee -a ceph-health-command.log; rados df |& tee -a ceph-health-command.log;ceph df |& tee -a ceph-health-command.log;ceph osd df |& tee -a ceph-health-command.log;sleep 300;done
+#
+for i in {1..10000};do echo "##### loop $i #####" |& tee -a imagecreation.log;
+date|& tee -a imagecreation.log; python image.py |& tee -a imagecreation.log;
+date |& tee -a imagecreation.log;done
+#
+for i in {1..20000};do echo "## loop $i ##" |& tee -a ceph-health.log;
+date |& tee -a ceph-health.log;ceph -s |& tee -a ceph-health.log;
+echo "=== rbd ls dockerpool1 ==" |& tee -a ceph-health.log;
+rbd ls dockerpool1|wc -l |& tee -a ceph-health.log;
+echo "=== rados ls --pool  dockerpool1 |wc -l =="  |& tee -a ceph-health.log;
+rados ls --pool dockerpool1 |wc -l |& tee -a ceph-health.log;
+echo "___rados df____"|& tee -a ceph-health.log;
+rados df|& tee -a ceph-health.log;ceph df |& tee -a ceph-health.log;
+ceph osd df |& tee -a ceph-health.log;sleep 300;done
 '''
 
 import random, os, string
