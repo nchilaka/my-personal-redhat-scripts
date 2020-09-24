@@ -1,12 +1,16 @@
-#developed by nchilaka
+# Developed by nchilaka
 '''
 this test helps in creating volumes of different types and configs randomly
 User needs to modify below variables:
-1) enter the hostname to the "hosts" list
-2) subvols: change this to the number of bricks suffixes required . 
+1) enter the hostname to the "hosts" list. This is a list of gluster server nodes
+2) subvols: change this to the number of bricks suffixes required. 
    Note that it takes brick path as /gluster/brick*
    hence, if there are /gluster/brick{1..10} then you can feed to this to use /gluster/brick{1..10}
 3) ranvoltype you need to enter the type of volumes you need
+4) Note that this script creates only 1 volume of a random type.
+   To create, say 500, volumes, then just run it in a loop as below:
+   for i in {1..500};do python <scriptname>;done
+5) This script doesn't mount the volume(s) created
 '''
 
 
