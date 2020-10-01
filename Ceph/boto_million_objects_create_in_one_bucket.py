@@ -9,11 +9,11 @@ Prerequisites:
 4) Change the number of objects if you would like to; default is 1Million
 5) Assign correct value of user, access and secret key instead of testuser2
 '''
-# import boto
+import boto
 import boto.s3.connection
 
-user = "testuser2",
-access_key = "XT2P5T16LNYOGQU9SOID",
+user = "testuser2"
+access_key = "XT2P5T16LNYOGQU9SOID"
 secret_key = "W1GtGK7AE5A4eNHcfqHiV7DThCiOwDQmArOJCUQM"
 
 boto.config.add_section('s3')
